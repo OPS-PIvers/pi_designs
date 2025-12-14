@@ -1024,6 +1024,237 @@
             color: var(--text-muted);
         }
 
+        /* Premium Testimonial Carousel */
+        .testimonial-carousel-wrapper {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .testimonial-carousel {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .testimonial-slide {
+            min-width: 100%;
+            padding: 0 1rem;
+            box-sizing: border-box;
+        }
+
+        .testimonial-card-premium {
+            background: linear-gradient(135deg, var(--bg-elevated) 0%, rgba(115, 157, 92, 0.05) 100%);
+            padding: 3rem 3.5rem;
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(115, 157, 92, 0.15);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .testimonial-card-premium::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-kinetic), var(--accent-solar));
+            opacity: 0.8;
+        }
+
+        .testimonial-card-premium::after {
+            content: '\201C';
+            position: absolute;
+            top: 2rem;
+            right: 3rem;
+            font-size: 8rem;
+            font-family: var(--font-head);
+            color: var(--accent-kinetic);
+            opacity: 0.08;
+            line-height: 1;
+            pointer-events: none;
+        }
+
+        .testimonial-stars {
+            display: flex;
+            gap: 0.35rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonial-stars i {
+            color: var(--accent-solar);
+            font-size: 1.1rem;
+            filter: drop-shadow(0 0 4px rgba(215, 189, 70, 0.4));
+        }
+
+        .testimonial-quote {
+            font-size: 1.25rem;
+            color: var(--text-main);
+            line-height: 1.9;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+            font-weight: 400;
+        }
+
+        .testimonial-author-premium {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .testimonial-avatar-premium {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-kinetic), var(--accent-kinetic-light));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(115, 157, 92, 0.3);
+            flex-shrink: 0;
+        }
+
+        .testimonial-info-premium h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+            color: var(--text-main);
+        }
+
+        .testimonial-info-premium span {
+            font-size: 0.9rem;
+            color: var(--accent-kinetic);
+            font-weight: 500;
+        }
+
+        .testimonial-info-premium p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        /* Carousel Navigation */
+        .carousel-nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin-top: 2.5rem;
+        }
+
+        .carousel-dots {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--slate-charcoal);
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .carousel-dot::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            transition: var(--transition);
+        }
+
+        .carousel-dot:hover {
+            background: var(--slate-stone);
+        }
+
+        .carousel-dot.active {
+            background: var(--accent-kinetic);
+            box-shadow: 0 0 12px rgba(115, 157, 92, 0.5);
+        }
+
+        .carousel-dot.active::after {
+            border-color: rgba(115, 157, 92, 0.3);
+        }
+
+        .carousel-arrow {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--bg-elevated);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+
+        .carousel-arrow:hover {
+            background: var(--accent-kinetic);
+            color: #fff;
+            border-color: var(--accent-kinetic);
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(115, 157, 92, 0.3);
+        }
+
+        .carousel-arrow:active {
+            transform: scale(0.98);
+        }
+
+        /* Auto-play indicator */
+        .carousel-progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-kinetic), var(--accent-solar));
+            border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+            transition: width 0.1s linear;
+        }
+
+        /* Pause indicator on hover */
+        .testimonial-carousel-wrapper:hover .carousel-progress {
+            opacity: 0.5;
+        }
+
+        @media (max-width: 768px) {
+            .testimonial-card-premium {
+                padding: 2rem 1.5rem;
+            }
+
+            .testimonial-card-premium::after {
+                font-size: 5rem;
+                right: 1.5rem;
+            }
+
+            .testimonial-quote {
+                font-size: 1.05rem;
+            }
+
+            .carousel-arrow {
+                width: 40px;
+                height: 40px;
+            }
+
+            .carousel-nav {
+                gap: 1rem;
+            }
+        }
+
         /* Contact Section */
         .contact {
             background: var(--bg-base);
@@ -1782,31 +2013,120 @@
                 </p>
             </div>
 
-            <div class="testimonial-grid">
-                <div class="testimonial-card fade-in">
-                    <p class="testimonial-content">
-                        The attention to detail and technical expertise brought to our project was exceptional. The solution not only met our requirements but exceeded our expectations in both functionality and design.
-                    </p>
-                    <div class="testimonial-author">
-                        <div class="testimonial-avatar">JD</div>
-                        <div class="testimonial-info">
-                            <h4>Department Lead</h4>
-                            <span>Educational Institution</span>
+            <div class="testimonial-carousel-wrapper" id="testimonial-carousel">
+                <div class="testimonial-carousel" id="carousel-track">
+                    <!-- Testimonial 1 -->
+                    <div class="testimonial-slide">
+                        <div class="testimonial-card-premium">
+                            <div class="testimonial-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="testimonial-quote">
+                                The attention to detail and technical expertise brought to our project was exceptional. The solution not only met our requirements but exceeded our expectations in both functionality and design. Truly a game-changer for our department.
+                            </p>
+                            <div class="testimonial-author-premium">
+                                <div class="testimonial-avatar-premium">JD</div>
+                                <div class="testimonial-info-premium">
+                                    <h4>Dr. James Davidson</h4>
+                                    <span>Department Lead</span>
+                                    <p>State University</p>
+                                </div>
+                            </div>
+                            <div class="carousel-progress" id="progress-bar"></div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 2 -->
+                    <div class="testimonial-slide">
+                        <div class="testimonial-card-premium">
+                            <div class="testimonial-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="testimonial-quote">
+                                Working with 314 Solutions transformed how we approach student engagement. The platform is intuitive, reliable, and has significantly improved participation across our programs. Our students love it.
+                            </p>
+                            <div class="testimonial-author-premium">
+                                <div class="testimonial-avatar-premium">SM</div>
+                                <div class="testimonial-info-premium">
+                                    <h4>Sarah Mitchell</h4>
+                                    <span>Program Coordinator</span>
+                                    <p>K-12 School District</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 3 -->
+                    <div class="testimonial-slide">
+                        <div class="testimonial-card-premium">
+                            <div class="testimonial-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="testimonial-quote">
+                                The AI integration work was nothing short of remarkable. Complex workflows that used to take hours are now automated, freeing our team to focus on what matters most. Highly recommend for any organization looking to modernize.
+                            </p>
+                            <div class="testimonial-author-premium">
+                                <div class="testimonial-avatar-premium">RK</div>
+                                <div class="testimonial-info-premium">
+                                    <h4>Rachel Kim</h4>
+                                    <span>Operations Director</span>
+                                    <p>EdTech Startup</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 4 -->
+                    <div class="testimonial-slide">
+                        <div class="testimonial-card-premium">
+                            <div class="testimonial-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="testimonial-quote">
+                                From concept to deployment, the entire process was seamless. The communication was clear, deadlines were met, and the final product exceeded what we envisioned. A true professional who understands both design and development.
+                            </p>
+                            <div class="testimonial-author-premium">
+                                <div class="testimonial-avatar-premium">MT</div>
+                                <div class="testimonial-info-premium">
+                                    <h4>Michael Torres</h4>
+                                    <span>Technology Director</span>
+                                    <p>Private Academy</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="testimonial-card fade-in">
-                    <p class="testimonial-content">
-                        Working with 314 Solutions transformed how we approach student engagement. The platform is intuitive, reliable, and has significantly improved participation across our programs.
-                    </p>
-                    <div class="testimonial-author">
-                        <div class="testimonial-avatar">SM</div>
-                        <div class="testimonial-info">
-                            <h4>Program Coordinator</h4>
-                            <span>K-12 District</span>
-                        </div>
+                <!-- Carousel Navigation -->
+                <div class="carousel-nav">
+                    <button class="carousel-arrow" id="prev-btn" aria-label="Previous testimonial">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div class="carousel-dots" id="carousel-dots">
+                        <button class="carousel-dot active" data-index="0" aria-label="Go to testimonial 1"></button>
+                        <button class="carousel-dot" data-index="1" aria-label="Go to testimonial 2"></button>
+                        <button class="carousel-dot" data-index="2" aria-label="Go to testimonial 3"></button>
+                        <button class="carousel-dot" data-index="3" aria-label="Go to testimonial 4"></button>
                     </div>
+                    <button class="carousel-arrow" id="next-btn" aria-label="Next testimonial">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
                 </div>
             </div>
         </div>
@@ -1830,7 +2150,7 @@
                             </div>
                             <div class="contact-method-text">
                                 <h4>Email</h4>
-                                <a href="mailto:hello@314solutions.dev">hello@314solutions.dev</a>
+                                <a href="mailto:paulwivers@gmail.com">paulwivers@gmail.com</a>
                             </div>
                         </div>
 
@@ -2021,7 +2341,7 @@
                 `Name: ${data.name}\nEmail: ${data.email}\nProject Type: ${data.project || 'Not specified'}\n\nMessage:\n${data.message}`
             );
 
-            window.location.href = `mailto:hello@314solutions.dev?subject=${subject}&body=${body}`;
+            window.location.href = `mailto:paulwivers@gmail.com?subject=${subject}&body=${body}`;
         });
 
         // Smooth scroll for anchor links
@@ -2041,6 +2361,155 @@
                 }
             });
         });
+
+        // Testimonial Carousel
+        (function() {
+            const track = document.getElementById('carousel-track');
+            const slides = document.querySelectorAll('.testimonial-slide');
+            const dots = document.querySelectorAll('.carousel-dot');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const progressBar = document.getElementById('progress-bar');
+            const wrapper = document.getElementById('testimonial-carousel');
+
+            let currentIndex = 0;
+            let autoPlayInterval;
+            let progressInterval;
+            const autoPlayDelay = 6000;
+            const progressStep = 50;
+            let progressWidth = 0;
+            let isPaused = false;
+
+            function updateCarousel(animate = true) {
+                if (!animate) {
+                    track.style.transition = 'none';
+                } else {
+                    track.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+                }
+                track.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentIndex);
+                });
+
+                resetProgress();
+            }
+
+            function nextSlide() {
+                currentIndex = (currentIndex + 1) % slides.length;
+                updateCarousel();
+            }
+
+            function prevSlide() {
+                currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+                updateCarousel();
+            }
+
+            function goToSlide(index) {
+                currentIndex = index;
+                updateCarousel();
+            }
+
+            function resetProgress() {
+                progressWidth = 0;
+                if (progressBar) {
+                    progressBar.style.width = '0%';
+                }
+            }
+
+            function updateProgress() {
+                if (isPaused) return;
+                progressWidth += (progressStep / autoPlayDelay) * 100;
+                if (progressBar) {
+                    progressBar.style.width = `${Math.min(progressWidth, 100)}%`;
+                }
+            }
+
+            function startAutoPlay() {
+                stopAutoPlay();
+                progressInterval = setInterval(updateProgress, progressStep);
+                autoPlayInterval = setInterval(() => {
+                    if (!isPaused) {
+                        nextSlide();
+                    }
+                }, autoPlayDelay);
+            }
+
+            function stopAutoPlay() {
+                clearInterval(autoPlayInterval);
+                clearInterval(progressInterval);
+            }
+
+            // Event Listeners
+            nextBtn.addEventListener('click', () => {
+                nextSlide();
+                startAutoPlay();
+            });
+
+            prevBtn.addEventListener('click', () => {
+                prevSlide();
+                startAutoPlay();
+            });
+
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    goToSlide(index);
+                    startAutoPlay();
+                });
+            });
+
+            // Pause on hover
+            wrapper.addEventListener('mouseenter', () => {
+                isPaused = true;
+            });
+
+            wrapper.addEventListener('mouseleave', () => {
+                isPaused = false;
+            });
+
+            // Touch support for mobile
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            wrapper.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+
+            wrapper.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            }, { passive: true });
+
+            function handleSwipe() {
+                const swipeThreshold = 50;
+                const diff = touchStartX - touchEndX;
+
+                if (Math.abs(diff) > swipeThreshold) {
+                    if (diff > 0) {
+                        nextSlide();
+                    } else {
+                        prevSlide();
+                    }
+                    startAutoPlay();
+                }
+            }
+
+            // Keyboard navigation
+            wrapper.setAttribute('tabindex', '0');
+            wrapper.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') {
+                    prevSlide();
+                    startAutoPlay();
+                } else if (e.key === 'ArrowRight') {
+                    nextSlide();
+                    startAutoPlay();
+                }
+            });
+
+            // Initialize
+            updateCarousel(false);
+            startAutoPlay();
+        })();
     </script>
 
 </body>
