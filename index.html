@@ -243,7 +243,7 @@
             z-index: 1;
         }
 
-        /* Decorative elements */
+        /* Decorative elements - Enhanced with floating animation */
         .hero-decoration {
             position: absolute;
             width: 600px;
@@ -251,17 +251,30 @@
             border-radius: 50%;
             background: radial-gradient(circle, rgba(115, 157, 92, 0.08) 0%, transparent 70%);
             z-index: 0;
+            pointer-events: none;
         }
 
         .hero-decoration-1 {
             top: -200px;
             right: -200px;
+            animation: floatDecoration1 20s ease-in-out infinite;
         }
 
         .hero-decoration-2 {
             bottom: -300px;
             left: -200px;
             background: radial-gradient(circle, rgba(54, 62, 66, 0.15) 0%, transparent 70%);
+            animation: floatDecoration2 25s ease-in-out infinite;
+        }
+
+        /* Additional floating orb for depth */
+        .hero-decoration-3 {
+            width: 300px;
+            height: 300px;
+            top: 50%;
+            left: 10%;
+            background: radial-gradient(circle, rgba(215, 189, 70, 0.05) 0%, transparent 70%);
+            animation: floatDecoration3 18s ease-in-out infinite;
         }
 
         .hero-content {
@@ -274,20 +287,33 @@
         .hero-badge {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            background: rgba(115, 157, 92, 0.1);
-            border: 1px solid rgba(115, 157, 92, 0.3);
+            gap: 0.75rem;
+            padding: 0.6rem 1.25rem;
+            background: linear-gradient(135deg, rgba(115, 157, 92, 0.15) 0%, rgba(115, 157, 92, 0.08) 100%);
+            border: 1px solid rgba(115, 157, 92, 0.35);
             border-radius: 50px;
             color: var(--accent-kinetic);
             font-size: 0.85rem;
             font-weight: 600;
             margin-bottom: 2rem;
-            animation: fadeInUp 0.8s ease;
+            animation: fadeInUp 0.8s ease, badgeGlow 3s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-badge::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(115, 157, 92, 0.2), transparent);
+            animation: badgeShimmer 3s ease-in-out infinite;
+            transform: translateX(-100%);
         }
 
         .hero-badge i {
-            font-size: 0.7rem;
+            font-size: 0.5rem;
+            animation: pulse 2s ease-in-out infinite;
+            filter: drop-shadow(0 0 4px var(--accent-kinetic));
         }
 
         h1 {
@@ -367,10 +393,10 @@
             transform: translateY(-2px);
         }
 
-        /* Stats Bar */
+        /* Stats Bar - Premium Glass Cards */
         .hero-stats {
             display: flex;
-            gap: 3rem;
+            gap: 2rem;
             justify-content: center;
             padding-top: 3rem;
             border-top: 1px solid rgba(255,255,255,0.05);
@@ -379,19 +405,99 @@
 
         .stat-item {
             text-align: center;
+            background: linear-gradient(135deg, rgba(31, 45, 39, 0.8) 0%, rgba(62, 79, 69, 0.4) 100%);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(115, 157, 92, 0.15);
+            border-radius: var(--radius-lg);
+            padding: 2rem 2.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+            min-width: 160px;
+        }
+
+        .stat-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-kinetic), var(--accent-solar));
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .stat-item::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 0%, rgba(115, 157, 92, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .stat-item:hover {
+            transform: translateY(-8px);
+            border-color: rgba(115, 157, 92, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(115, 157, 92, 0.15);
+        }
+
+        .stat-item:hover::before {
+            opacity: 1;
+        }
+
+        .stat-item:hover::after {
+            opacity: 1;
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(115, 157, 92, 0.15) 0%, rgba(115, 157, 92, 0.25) 100%);
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            color: var(--accent-kinetic);
+            font-size: 1.25rem;
+            border: 1px solid rgba(115, 157, 92, 0.2);
+            transition: var(--transition);
+        }
+
+        .stat-item:hover .stat-icon {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(115, 157, 92, 0.3);
         }
 
         .stat-number {
             font-family: var(--font-head);
-            font-size: 2.5rem;
+            font-size: 3rem;
             color: var(--text-main);
             line-height: 1;
+            position: relative;
+            display: inline-block;
+        }
+
+        .stat-number .count-value {
+            display: inline-block;
+            min-width: 1.2em;
+        }
+
+        .stat-number .stat-suffix {
+            font-size: 1.5rem;
+            color: var(--accent-kinetic);
+            margin-left: 2px;
         }
 
         .stat-label {
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             color: var(--text-muted);
-            margin-top: 0.5rem;
+            margin-top: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
         }
 
         /* Scroll Indicator */
@@ -1517,6 +1623,90 @@
             }
         }
 
+        /* Pulsing dot animation for badge */
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.6;
+                transform: scale(1.2);
+            }
+        }
+
+        /* Badge glow animation */
+        @keyframes badgeGlow {
+            0%, 100% {
+                box-shadow: 0 0 15px rgba(115, 157, 92, 0.1);
+            }
+            50% {
+                box-shadow: 0 0 25px rgba(115, 157, 92, 0.25);
+            }
+        }
+
+        /* Badge shimmer effect */
+        @keyframes badgeShimmer {
+            0% {
+                transform: translateX(-100%);
+            }
+            50%, 100% {
+                transform: translateX(100%);
+            }
+        }
+
+        /* Floating decoration animations */
+        @keyframes floatDecoration1 {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            25% {
+                transform: translate(30px, 20px) rotate(5deg);
+            }
+            50% {
+                transform: translate(-20px, 40px) rotate(-3deg);
+            }
+            75% {
+                transform: translate(40px, -10px) rotate(8deg);
+            }
+        }
+
+        @keyframes floatDecoration2 {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            33% {
+                transform: translate(-40px, -30px) rotate(-5deg);
+            }
+            66% {
+                transform: translate(20px, -50px) rotate(5deg);
+            }
+        }
+
+        @keyframes floatDecoration3 {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+                opacity: 0.5;
+            }
+            50% {
+                transform: translate(50px, -30px) scale(1.1);
+                opacity: 0.8;
+            }
+        }
+
+        /* Number counter pop animation */
+        @keyframes countPop {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
         /* Scroll Animations */
         .fade-in {
             opacity: 0;
@@ -1582,7 +1772,33 @@
 
             .hero-stats {
                 flex-direction: column;
-                gap: 2rem;
+                gap: 1.25rem;
+            }
+
+            .stat-item {
+                padding: 1.5rem 2rem;
+                min-width: auto;
+                width: 100%;
+                max-width: 280px;
+                margin: 0 auto;
+            }
+
+            .stat-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+
+            .stat-number {
+                font-size: 2.5rem;
+            }
+
+            .stat-number .stat-suffix {
+                font-size: 1.25rem;
+            }
+
+            .hero-decoration-3 {
+                display: none;
             }
 
             .about-grid,
@@ -1666,6 +1882,7 @@
     <section class="hero">
         <div class="hero-decoration hero-decoration-1"></div>
         <div class="hero-decoration hero-decoration-2"></div>
+        <div class="hero-decoration hero-decoration-3"></div>
 
         <div class="hero-content">
             <div class="hero-badge">
@@ -1694,17 +1911,32 @@
                 </a>
             </div>
 
-            <div class="hero-stats">
+            <div class="hero-stats" id="hero-stats">
                 <div class="stat-item">
-                    <div class="stat-number">5+</div>
+                    <div class="stat-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-number">
+                        <span class="count-value" data-target="5" data-suffix="+">0</span><span class="stat-suffix">+</span>
+                    </div>
                     <div class="stat-label">Years Experience</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">20+</div>
+                    <div class="stat-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <div class="stat-number">
+                        <span class="count-value" data-target="20" data-suffix="+">0</span><span class="stat-suffix">+</span>
+                    </div>
                     <div class="stat-label">Projects Delivered</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">100%</div>
+                    <div class="stat-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="stat-number">
+                        <span class="count-value" data-target="100" data-suffix="%">0</span><span class="stat-suffix">%</span>
+                    </div>
                     <div class="stat-label">Client Satisfaction</div>
                 </div>
             </div>
@@ -2361,6 +2593,65 @@
                 }
             });
         });
+
+        // Animated Number Counter
+        (function() {
+            const counters = document.querySelectorAll('.count-value');
+            let hasAnimated = false;
+
+            function easeOutQuart(t) {
+                return 1 - Math.pow(1 - t, 4);
+            }
+
+            function animateCounter(counter) {
+                const target = parseInt(counter.getAttribute('data-target'));
+                const duration = 2000;
+                const startTime = performance.now();
+
+                function updateCount(currentTime) {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    const easedProgress = easeOutQuart(progress);
+                    const currentValue = Math.floor(easedProgress * target);
+
+                    counter.textContent = currentValue;
+
+                    if (progress < 1) {
+                        requestAnimationFrame(updateCount);
+                    } else {
+                        counter.textContent = target;
+                        counter.parentElement.style.animation = 'countPop 0.3s ease';
+                    }
+                }
+
+                requestAnimationFrame(updateCount);
+            }
+
+            function startCounters() {
+                if (hasAnimated) return;
+                hasAnimated = true;
+
+                counters.forEach((counter, index) => {
+                    setTimeout(() => {
+                        animateCounter(counter);
+                    }, index * 200);
+                });
+            }
+
+            const statsSection = document.getElementById('hero-stats');
+            if (statsSection) {
+                const statsObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            startCounters();
+                            statsObserver.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.3 });
+
+                statsObserver.observe(statsSection);
+            }
+        })();
 
         // Testimonial Carousel
         (function() {
