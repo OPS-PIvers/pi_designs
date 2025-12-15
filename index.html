@@ -1847,6 +1847,382 @@
                 padding: 5rem 0;
             }
         }
+
+        /* Project Modal Styles */
+        .project-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+        }
+
+        .modal-backdrop {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            cursor: pointer;
+        }
+
+        .modal-container {
+            position: relative;
+            background: var(--bg-card);
+            border-radius: 16px;
+            max-width: 900px;
+            max-height: 90vh;
+            width: 90%;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: var(--bg-surface);
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            transition: all 0.2s ease;
+        }
+
+        .modal-close:hover {
+            background: var(--accent-kinetic);
+            color: white;
+        }
+
+        .modal-gallery {
+            position: relative;
+            background: #000;
+        }
+
+        .gallery-main {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+        }
+
+        .gallery-item {
+            display: none;
+            width: 100%;
+            height: 100%;
+        }
+
+        .gallery-item.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gallery-item img,
+        .gallery-item video {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .gallery-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            border: none;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.25rem;
+            color: #333;
+            transition: all 0.2s ease;
+        }
+
+        .gallery-nav:hover {
+            background: white;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .gallery-prev { left: 1rem; }
+        .gallery-next { right: 1rem; }
+
+        .gallery-thumbnails {
+            display: flex;
+            gap: 0.5rem;
+            padding: 0.75rem;
+            background: rgba(0, 0, 0, 0.8);
+            overflow-x: auto;
+            justify-content: center;
+        }
+
+        .gallery-thumb {
+            width: 60px;
+            height: 45px;
+            border: 2px solid transparent;
+            border-radius: 4px;
+            overflow: hidden;
+            cursor: pointer;
+            padding: 0;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .gallery-thumb.active {
+            border-color: var(--accent-solar);
+        }
+
+        .gallery-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-thumb i {
+            font-size: 1.25rem;
+            color: white;
+        }
+
+        .modal-content {
+            padding: 2rem;
+        }
+
+        .modal-category {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: var(--accent-kinetic);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+        }
+
+        .modal-title {
+            font-family: var(--font-head);
+            font-size: 2rem;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .modal-tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-tech-tag {
+            padding: 0.25rem 0.75rem;
+            background: var(--bg-surface);
+            border-radius: 4px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .modal-description {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        .modal-description h2,
+        .modal-description h3,
+        .modal-description h4 {
+            color: var(--text-primary);
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .modal-description h3 { font-size: 1.25rem; }
+        .modal-description h4 { font-size: 1.1rem; }
+
+        .modal-description ul {
+            padding-left: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .modal-description li {
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-description a {
+            color: var(--accent-kinetic);
+            text-decoration: underline;
+        }
+
+        .modal-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .modal-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .modal-link.github {
+            background: #24292e;
+            color: white;
+        }
+
+        .modal-link.github:hover {
+            background: #1b1f23;
+        }
+
+        .modal-link.live {
+            background: var(--accent-kinetic);
+            color: white;
+        }
+
+        .modal-link.live:hover {
+            background: var(--accent-moss);
+        }
+
+        /* Project card overlay for click-to-view */
+        .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+
+        .view-project-btn {
+            padding: 0.75rem 1.5rem;
+            background: white;
+            color: #1a1a1a;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .view-project-btn:hover {
+            background: var(--accent-solar);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .project-placeholder {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--bg-surface), var(--bg-card));
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .project-placeholder i {
+            font-size: 2.5rem;
+        }
+
+        .project-placeholder span {
+            font-size: 0.875rem;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .project-links .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Responsive modal */
+        @media (max-width: 768px) {
+            .modal-container {
+                width: 95%;
+                max-height: 95vh;
+                border-radius: 12px;
+            }
+
+            .modal-content {
+                padding: 1.5rem;
+            }
+
+            .modal-title {
+                font-size: 1.5rem;
+            }
+
+            .gallery-nav {
+                width: 40px;
+                height: 40px;
+            }
+
+            .modal-links {
+                flex-direction: column;
+            }
+
+            .modal-link {
+                justify-content: center;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1914,30 +2290,30 @@
             <div class="hero-stats" id="hero-stats">
                 <div class="stat-item">
                     <div class="stat-icon">
-                        <i class="fas fa-clock"></i>
+                        <i class="fas fa-code"></i>
                     </div>
                     <div class="stat-number">
-                        <span class="count-value" data-target="5">0</span><span class="stat-suffix">+</span>
+                        <span class="count-value" data-target="3">0</span><span class="stat-suffix"></span>
                     </div>
-                    <div class="stat-label">Years Experience</div>
+                    <div class="stat-label">Featured Projects</div>
                 </div>
                 <div class="stat-item">
                     <div class="stat-icon">
-                        <i class="fas fa-rocket"></i>
+                        <i class="fas fa-laptop-code"></i>
                     </div>
                     <div class="stat-number">
-                        <span class="count-value" data-target="20" data-suffix="+">0</span><span class="stat-suffix">+</span>
+                        <span class="count-value" data-target="5" data-suffix="+">0</span><span class="stat-suffix">+</span>
                     </div>
-                    <div class="stat-label">Projects Delivered</div>
+                    <div class="stat-label">Technologies Used</div>
                 </div>
                 <div class="stat-item">
                     <div class="stat-icon">
-                        <i class="fas fa-heart"></i>
+                        <i class="fab fa-github"></i>
                     </div>
                     <div class="stat-number">
                         <span class="count-value" data-target="100" data-suffix="%">0</span><span class="stat-suffix">%</span>
                     </div>
-                    <div class="stat-label">Client Satisfaction</div>
+                    <div class="stat-label">Open Source</div>
                 </div>
             </div>
         </div>
@@ -2117,119 +2493,89 @@
             </div>
 
             <div class="project-grid">
-                <!-- Doc2LMS -->
-                <div class="project-card fade-in">
-                    <div class="project-image">
-                        <picture>
-                            <source
-                                srcset="images/doc2lms-preview-medium.webp 1024w,
-                                        images/doc2lms-preview-small.webp 640w,
-                                        images/doc2lms-preview-thumbnail.webp 320w"
-                                type="image/webp"
-                                sizes="(min-width: 1200px) 350px, (min-width: 768px) 45vw, 100vw">
-                            <img
-                                src="images/doc2lms-preview-medium.jpg"
-                                srcset="images/doc2lms-preview-medium.jpg 1024w,
-                                        images/doc2lms-preview-small.jpg 640w,
-                                        images/doc2lms-preview-thumbnail.jpg 320w"
-                                sizes="(min-width: 1200px) 350px, (min-width: 768px) 45vw, 100vw"
-                                alt="Doc2LMS Interface"
-                                loading="lazy">
-                        </picture>
-                        <div class="project-overlay"></div>
-                    </div>
-                    <div class="project-content">
-                        <span class="project-category">Education Technology</span>
-                        <h3 class="project-title">Doc2LMS</h3>
-                        <p class="project-description">
-                            Streamlined quiz creation tool that converts Google Documents into LMS-compatible formats with automated QTI export for Canvas and Blackboard.
-                        </p>
-                        <div class="tech-stack">
-                            <span class="tech-badge">JavaScript</span>
-                            <span class="tech-badge">Google Apps Script</span>
-                            <span class="tech-badge">QTI</span>
-                        </div>
-                        <a href="https://github.com/OPS-PIvers/Doc2LMS" target="_blank" rel="noopener" class="project-link">
-                            View Project <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
+                <!-- DYNAMIC-PROJECTS-START -->
 
-                <!-- Peer Evaluator -->
-                <div class="project-card fade-in">
-                    <div class="project-image">
-                        <picture>
-                            <source
-                                srcset="images/peer-eval-preview-medium.webp 1024w,
-                                        images/peer-eval-preview-small.webp 640w,
-                                        images/peer-eval-preview-thumbnail.webp 320w"
-                                type="image/webp"
-                                sizes="(min-width: 1200px) 350px, (min-width: 768px) 45vw, 100vw">
-                            <img
-                                src="images/peer-eval-preview-medium.jpg"
-                                srcset="images/peer-eval-preview-medium.jpg 1024w,
-                                        images/peer-eval-preview-small.jpg 640w,
-                                        images/peer-eval-preview-thumbnail.jpg 320w"
-                                sizes="(min-width: 1200px) 350px, (min-width: 768px) 45vw, 100vw"
-                                alt="Peer Evaluator Interface"
-                                loading="lazy">
-                        </picture>
-                        <div class="project-overlay"></div>
-                    </div>
-                    <div class="project-content">
-                        <span class="project-category">AI-Powered Assessment</span>
-                        <h3 class="project-title">Peer Evaluator</h3>
-                        <p class="project-description">
-                            AI-enhanced peer evaluation system integrating Claude and Gemini for intelligent feedback processing and collaborative assessment workflows.
-                        </p>
-                        <div class="tech-stack">
-                            <span class="tech-badge">JavaScript</span>
-                            <span class="tech-badge">Claude AI</span>
-                            <span class="tech-badge">Gemini AI</span>
+                    <!-- Doc2LMS -->
+                    <div class="project-card" data-project="Doc2LMS">
+                        <div class="project-image">
+                            <img src="projects/Doc2LMS/cover.jpg" alt="Doc2LMS" loading="lazy">
+                            <div class="project-overlay">
+                                <button class="view-project-btn" onclick="openProjectModal('Doc2LMS')">
+                                    <i class="fas fa-expand"></i> View Details
+                                </button>
+                            </div>
                         </div>
-                        <a href="https://github.com/OPS-PIvers/PeerEvaluatorForm" target="_blank" rel="noopener" class="project-link">
-                            View Project <i class="fas fa-arrow-right"></i>
-                        </a>
+                        <div class="project-content">
+                            <span class="project-category">Education Technology</span>
+                            <h3 class="project-title">Doc2LMS</h3>
+                            <p class="project-description">Streamlined quiz creation tool that converts Google Documents into LMS-compatible formats with automated QTI export for Canvas and Blackboard.</p>
+                            <div class="project-tech">
+                                <span class="tech-badge">JavaScript</span>
+                                <span class="tech-badge">Google Apps Script</span>
+                                <span class="tech-badge">QTI</span>
+                            </div>
+                            <div class="project-links">
+                            <a href="https://github.com/OPS-PIvers/Doc2LMS" class="project-link" target="_blank" rel="noopener">
+                                <i class="fab fa-github"></i> View on GitHub
+                            </a>
+                            </div>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Spartan Cup -->
-                <div class="project-card fade-in">
-                    <div class="project-image">
-                        <picture>
-                            <source
-                                srcset="images/spartan-cup-preview-medium.webp 1024w,
-                                        images/spartan-cup-preview-small.webp 640w,
-                                        images/spartan-cup-preview-thumbnail.webp 320w"
-                                type="image/webp"
-                                sizes="(min-width: 1200px) 350px, (min-width: 768px) 45vw, 100vw">
-                            <img
-                                src="images/spartan-cup-preview-medium.jpg"
-                                srcset="images/spartan-cup-preview-medium.jpg 1024w,
-                                        images/spartan-cup-preview-small.jpg 640w,
-                                        images/spartan-cup-preview-thumbnail.jpg 320w"
-                                sizes="(min-width: 1200px) 350px, (min-width: 768px) 45vw, 100vw"
-                                alt="Spartan Cup Interface"
-                                loading="lazy">
-                        </picture>
-                        <div class="project-overlay"></div>
-                    </div>
-                    <div class="project-content">
-                        <span class="project-category">Student Engagement</span>
-                        <h3 class="project-title">Spartan Cup</h3>
-                        <p class="project-description">
-                            Gamified engagement platform featuring location-based check-ins, real-time leaderboards, and achievement systems for school events.
-                        </p>
-                        <div class="tech-stack">
-                            <span class="tech-badge">Firebase</span>
-                            <span class="tech-badge">Tailwind CSS</span>
-                            <span class="tech-badge">Python</span>
+                    <!-- Peer Evaluator -->
+                    <div class="project-card" data-project="Peer_Evaluator">
+                        <div class="project-image">
+                            <img src="projects/Peer_Evaluator/cover.jpg" alt="Peer Evaluator" loading="lazy">
+                            <div class="project-overlay">
+                                <button class="view-project-btn" onclick="openProjectModal('Peer_Evaluator')">
+                                    <i class="fas fa-expand"></i> View Details
+                                </button>
+                            </div>
                         </div>
-                        <a href="https://github.com/OPS-PIvers/Spartan_Cup" target="_blank" rel="noopener" class="project-link">
-                            View Project <i class="fas fa-arrow-right"></i>
-                        </a>
+                        <div class="project-content">
+                            <span class="project-category">AI-Powered Assessment</span>
+                            <h3 class="project-title">Peer Evaluator</h3>
+                            <p class="project-description">AI-enhanced peer evaluation system integrating Claude and Gemini for intelligent feedback processing and collaborative assessment workflows.</p>
+                            <div class="project-tech">
+                                <span class="tech-badge">JavaScript</span>
+                                <span class="tech-badge">Claude AI</span>
+                                <span class="tech-badge">Gemini AI</span>
+                            </div>
+                            <div class="project-links">
+                            <a href="https://github.com/OPS-PIvers/PeerEvaluatorForm" class="project-link" target="_blank" rel="noopener">
+                                <i class="fab fa-github"></i> View on GitHub
+                            </a>
+                            </div>
+                        </div>
                     </div>
-                </div>
+
+                    <!-- Spartan Cup -->
+                    <div class="project-card" data-project="Spartan_Cup">
+                        <div class="project-image">
+                            <img src="projects/Spartan_Cup/cover.jpg" alt="Spartan Cup" loading="lazy">
+                            <div class="project-overlay">
+                                <button class="view-project-btn" onclick="openProjectModal('Spartan_Cup')">
+                                    <i class="fas fa-expand"></i> View Details
+                                </button>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <span class="project-category">Student Engagement</span>
+                            <h3 class="project-title">Spartan Cup</h3>
+                            <p class="project-description">Gamified engagement platform featuring location-based check-ins, real-time leaderboards, and achievement systems for school events.</p>
+                            <div class="project-tech">
+                                <span class="tech-badge">Firebase</span>
+                                <span class="tech-badge">Tailwind CSS</span>
+                                <span class="tech-badge">Python</span>
+                            </div>
+                            <div class="project-links">
+                            <a href="https://github.com/OPS-PIvers/Spartan_Cup" class="project-link" target="_blank" rel="noopener">
+                                <i class="fab fa-github"></i> View on GitHub
+                            </a>
+                            </div>
+                        </div>
+                    </div>
+                <!-- DYNAMIC-PROJECTS-END -->
             </div>
         </div>
     </section>
@@ -2247,7 +2593,7 @@
 
             <div class="testimonial-carousel-wrapper" id="testimonial-carousel">
                 <div class="testimonial-carousel" id="carousel-track">
-                    <!-- Testimonial 1 -->
+                    <!-- Testimonial Placeholder 1 -->
                     <div class="testimonial-slide">
                         <div class="testimonial-card-premium">
                             <div class="testimonial-stars">
@@ -2257,22 +2603,22 @@
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                             </div>
-                            <p class="testimonial-quote">
-                                The attention to detail and technical expertise brought to our project was exceptional. The solution not only met our requirements but exceeded our expectations in both functionality and design. Truly a game-changer for our department.
+                            <p class="testimonial-quote" style="font-style: italic; opacity: 0.8;">
+                                [Your testimonial here] — This space is reserved for genuine feedback from clients and collaborators. Real testimonials coming soon!
                             </p>
                             <div class="testimonial-author-premium">
-                                <div class="testimonial-avatar-premium">JD</div>
+                                <div class="testimonial-avatar-premium">??</div>
                                 <div class="testimonial-info-premium">
-                                    <h4>Dr. James Davidson</h4>
-                                    <span>Department Lead</span>
-                                    <p>State University</p>
+                                    <h4>[Client Name]</h4>
+                                    <span>[Role/Title]</span>
+                                    <p>[Organization]</p>
                                 </div>
                             </div>
                             <div class="carousel-progress" id="progress-bar"></div>
                         </div>
                     </div>
 
-                    <!-- Testimonial 2 -->
+                    <!-- Testimonial Placeholder 2 -->
                     <div class="testimonial-slide">
                         <div class="testimonial-card-premium">
                             <div class="testimonial-stars">
@@ -2282,21 +2628,21 @@
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                             </div>
-                            <p class="testimonial-quote">
-                                Working with 314 Solutions transformed how we approach student engagement. The platform is intuitive, reliable, and has significantly improved participation across our programs. Our students love it.
+                            <p class="testimonial-quote" style="font-style: italic; opacity: 0.8;">
+                                [Your testimonial here] — We value authentic feedback. This placeholder will be replaced with real client experiences.
                             </p>
                             <div class="testimonial-author-premium">
-                                <div class="testimonial-avatar-premium">SM</div>
+                                <div class="testimonial-avatar-premium">??</div>
                                 <div class="testimonial-info-premium">
-                                    <h4>Sarah Mitchell</h4>
-                                    <span>Program Coordinator</span>
-                                    <p>K-12 School District</p>
+                                    <h4>[Client Name]</h4>
+                                    <span>[Role/Title]</span>
+                                    <p>[Organization]</p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Testimonial 3 -->
+                    <!-- Testimonial Placeholder 3 -->
                     <div class="testimonial-slide">
                         <div class="testimonial-card-premium">
                             <div class="testimonial-stars">
@@ -2306,39 +2652,15 @@
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                             </div>
-                            <p class="testimonial-quote">
-                                The AI integration work was nothing short of remarkable. Complex workflows that used to take hours are now automated, freeing our team to focus on what matters most. Highly recommend for any organization looking to modernize.
+                            <p class="testimonial-quote" style="font-style: italic; opacity: 0.8;">
+                                [Your testimonial here] — Genuine reviews from real collaborators will appear here as projects are completed.
                             </p>
                             <div class="testimonial-author-premium">
-                                <div class="testimonial-avatar-premium">RK</div>
+                                <div class="testimonial-avatar-premium">??</div>
                                 <div class="testimonial-info-premium">
-                                    <h4>Rachel Kim</h4>
-                                    <span>Operations Director</span>
-                                    <p>EdTech Startup</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Testimonial 4 -->
-                    <div class="testimonial-slide">
-                        <div class="testimonial-card-premium">
-                            <div class="testimonial-stars">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                            <p class="testimonial-quote">
-                                From concept to deployment, the entire process was seamless. The communication was clear, deadlines were met, and the final product exceeded what we envisioned. A true professional who understands both design and development.
-                            </p>
-                            <div class="testimonial-author-premium">
-                                <div class="testimonial-avatar-premium">MT</div>
-                                <div class="testimonial-info-premium">
-                                    <h4>Michael Torres</h4>
-                                    <span>Technology Director</span>
-                                    <p>Private Academy</p>
+                                    <h4>[Client Name]</h4>
+                                    <span>[Role/Title]</span>
+                                    <p>[Organization]</p>
                                 </div>
                             </div>
                         </div>
@@ -2354,7 +2676,6 @@
                         <button class="carousel-dot active" data-index="0" aria-label="Go to testimonial 1"></button>
                         <button class="carousel-dot" data-index="1" aria-label="Go to testimonial 2"></button>
                         <button class="carousel-dot" data-index="2" aria-label="Go to testimonial 3"></button>
-                        <button class="carousel-dot" data-index="3" aria-label="Go to testimonial 4"></button>
                     </div>
                     <button class="carousel-arrow" id="next-btn" aria-label="Next testimonial">
                         <i class="fas fa-chevron-right"></i>
@@ -2801,7 +3122,220 @@
             updateCarousel(false);
             startAutoPlay();
         })();
+
+        // Project Modal Functions
+        function openProjectModal(slug) {
+            const modal = document.getElementById('modal-' + slug);
+            if (!modal) return;
+
+            document.body.style.overflow = 'hidden';
+            modal.classList.add('active');
+            modal.setAttribute('aria-hidden', 'false');
+
+            // Focus trap
+            const focusableElements = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+            if (focusableElements.length > 0) {
+                focusableElements[0].focus();
+            }
+
+            // Initialize gallery if present
+            initModalGallery(modal);
+        }
+
+        function closeProjectModal(slug) {
+            const modal = document.getElementById('modal-' + slug);
+            if (!modal) return;
+
+            document.body.style.overflow = '';
+            modal.classList.remove('active');
+            modal.setAttribute('aria-hidden', 'true');
+        }
+
+        function initModalGallery(modal) {
+            const gallery = modal.querySelector('.modal-gallery');
+            if (!gallery) return;
+
+            const items = gallery.querySelectorAll('.gallery-item');
+            const thumbs = gallery.querySelectorAll('.gallery-thumb');
+            const prevBtn = gallery.querySelector('.gallery-prev');
+            const nextBtn = gallery.querySelector('.gallery-next');
+            let currentIndex = 0;
+
+            function showItem(index) {
+                items.forEach((item, i) => {
+                    item.classList.toggle('active', i === index);
+                });
+                thumbs.forEach((thumb, i) => {
+                    thumb.classList.toggle('active', i === index);
+                });
+                currentIndex = index;
+            }
+
+            if (prevBtn) {
+                prevBtn.addEventListener('click', () => {
+                    const newIndex = (currentIndex - 1 + items.length) % items.length;
+                    showItem(newIndex);
+                });
+            }
+
+            if (nextBtn) {
+                nextBtn.addEventListener('click', () => {
+                    const newIndex = (currentIndex + 1) % items.length;
+                    showItem(newIndex);
+                });
+            }
+
+            thumbs.forEach((thumb, index) => {
+                thumb.addEventListener('click', () => showItem(index));
+            });
+        }
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const activeModal = document.querySelector('.project-modal.active');
+                if (activeModal) {
+                    const slug = activeModal.id.replace('modal-', '');
+                    closeProjectModal(slug);
+                }
+            }
+        });
     </script>
+
+    <!-- PROJECT-MODALS-START -->
+    <!-- Doc2LMS Modal -->
+    <div class="project-modal" id="modal-Doc2LMS" role="dialog" aria-labelledby="modal-title-Doc2LMS" aria-hidden="true">
+        <div class="modal-backdrop" onclick="closeProjectModal('Doc2LMS')"></div>
+        <div class="modal-container">
+            <button class="modal-close" onclick="closeProjectModal('Doc2LMS')" aria-label="Close modal">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-gallery">
+                <div class="gallery-main">
+                    <div class="gallery-item active" data-index="0">
+                        <img src="projects/Doc2LMS/cover.jpg" alt="Doc2LMS screenshot" loading="lazy">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-content">
+                <span class="modal-category">Education Technology</span>
+                <h2 class="modal-title" id="modal-title-Doc2LMS">Doc2LMS</h2>
+                <div class="modal-tech-stack">
+                    <span class="modal-tech-tag">JavaScript</span>
+                    <span class="modal-tech-tag">Google Apps Script</span>
+                    <span class="modal-tech-tag">QTI</span>
+                </div>
+                <div class="modal-description">
+                    <h3>Overview</h3>
+                    <p>Doc2LMS transforms the way educators create assessments by providing a seamless bridge between familiar Google Documents and Learning Management Systems.</p>
+                    <h4>Key Features</h4>
+                    <ul>
+                        <li><strong>Familiar Interface</strong> - Write quizzes in Google Docs using simple formatting conventions</li>
+                        <li><strong>Automatic Conversion</strong> - Transform documents into QTI-compliant packages</li>
+                        <li><strong>Multi-Platform Support</strong> - Export to Canvas, Blackboard, and other QTI-compatible LMS platforms</li>
+                        <li><strong>Question Types</strong> - Support for multiple choice, true/false, matching, and essay questions</li>
+                    </ul>
+                    <h4>How It Works</h4>
+                    <p>Create your quiz in a Google Document using the formatting guide, run the Doc2LMS script from the add-ons menu, download the generated QTI package, and import directly into your LMS.</p>
+                </div>
+                <div class="modal-links">
+                    <a href="https://github.com/OPS-PIvers/Doc2LMS" class="modal-link github" target="_blank" rel="noopener">
+                        <i class="fab fa-github"></i> View Source Code
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Peer Evaluator Modal -->
+    <div class="project-modal" id="modal-Peer_Evaluator" role="dialog" aria-labelledby="modal-title-Peer_Evaluator" aria-hidden="true">
+        <div class="modal-backdrop" onclick="closeProjectModal('Peer_Evaluator')"></div>
+        <div class="modal-container">
+            <button class="modal-close" onclick="closeProjectModal('Peer_Evaluator')" aria-label="Close modal">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-gallery">
+                <div class="gallery-main">
+                    <div class="gallery-item active" data-index="0">
+                        <img src="projects/Peer_Evaluator/cover.jpg" alt="Peer Evaluator screenshot" loading="lazy">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-content">
+                <span class="modal-category">AI-Powered Assessment</span>
+                <h2 class="modal-title" id="modal-title-Peer_Evaluator">Peer Evaluator</h2>
+                <div class="modal-tech-stack">
+                    <span class="modal-tech-tag">JavaScript</span>
+                    <span class="modal-tech-tag">Claude AI</span>
+                    <span class="modal-tech-tag">Gemini AI</span>
+                </div>
+                <div class="modal-description">
+                    <h3>Overview</h3>
+                    <p>Peer Evaluator revolutionizes the peer review process by combining the power of AI with thoughtful assessment design, making collaborative feedback more meaningful and actionable.</p>
+                    <h4>Key Features</h4>
+                    <ul>
+                        <li><strong>AI-Powered Analysis</strong> - Leverages Claude and Gemini to process and synthesize feedback</li>
+                        <li><strong>Structured Rubrics</strong> - Customizable evaluation criteria with clear expectations</li>
+                        <li><strong>Anonymous Reviews</strong> - Unbiased peer feedback with optional anonymity settings</li>
+                        <li><strong>Automated Summaries</strong> - AI-generated summaries of peer feedback for quick insights</li>
+                    </ul>
+                    <h4>Use Cases</h4>
+                    <p>Academic settings for peer review of essays and projects, professional development for 360-degree feedback, and creative work critique for portfolios and design work.</p>
+                </div>
+                <div class="modal-links">
+                    <a href="https://github.com/OPS-PIvers/PeerEvaluatorForm" class="modal-link github" target="_blank" rel="noopener">
+                        <i class="fab fa-github"></i> View Source Code
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Spartan Cup Modal -->
+    <div class="project-modal" id="modal-Spartan_Cup" role="dialog" aria-labelledby="modal-title-Spartan_Cup" aria-hidden="true">
+        <div class="modal-backdrop" onclick="closeProjectModal('Spartan_Cup')"></div>
+        <div class="modal-container">
+            <button class="modal-close" onclick="closeProjectModal('Spartan_Cup')" aria-label="Close modal">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-gallery">
+                <div class="gallery-main">
+                    <div class="gallery-item active" data-index="0">
+                        <img src="projects/Spartan_Cup/cover.jpg" alt="Spartan Cup screenshot" loading="lazy">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-content">
+                <span class="modal-category">Student Engagement</span>
+                <h2 class="modal-title" id="modal-title-Spartan_Cup">Spartan Cup</h2>
+                <div class="modal-tech-stack">
+                    <span class="modal-tech-tag">Firebase</span>
+                    <span class="modal-tech-tag">Tailwind CSS</span>
+                    <span class="modal-tech-tag">Python</span>
+                </div>
+                <div class="modal-description">
+                    <h3>Overview</h3>
+                    <p>Spartan Cup brings the excitement of gamification to school events, encouraging student participation through friendly competition, achievements, and real-time leaderboards.</p>
+                    <h4>Key Features</h4>
+                    <ul>
+                        <li><strong>Location Check-ins</strong> - GPS-verified attendance at events and activities</li>
+                        <li><strong>Real-time Leaderboards</strong> - Live standings that update as students participate</li>
+                        <li><strong>Achievement System</strong> - Badges and milestones to reward engagement</li>
+                        <li><strong>House/Team Competition</strong> - Group-based scoring for school-wide events</li>
+                        <li><strong>Analytics Dashboard</strong> - Insights into participation trends and engagement metrics</li>
+                    </ul>
+                    <h4>Event Types Supported</h4>
+                    <p>Athletic competitions, academic challenges, community service events, spirit week activities, and club meetings.</p>
+                </div>
+                <div class="modal-links">
+                    <a href="https://github.com/OPS-PIvers/Spartan_Cup" class="modal-link github" target="_blank" rel="noopener">
+                        <i class="fab fa-github"></i> View Source Code
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- PROJECT-MODALS-END -->
 
 </body>
 </html>
