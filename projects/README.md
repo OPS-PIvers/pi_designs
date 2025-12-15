@@ -8,7 +8,7 @@ Each subdirectory in `/projects/` represents a project. The website reads these 
 
 ## Adding a New Project
 
-### 1. Create a Project Directory
+### 1. Create a Project Directory.
 
 Create a new subdirectory with your project name. Use underscores for spaces:
 
@@ -21,7 +21,7 @@ projects/
     demo.mp4          <-- Optional: video files
 ```
 
-### 2. Create the project.md File
+### 2. Create the project.md File.
 
 Every project needs a `project.md` file with YAML front matter:
 
@@ -63,7 +63,7 @@ More detailed information about how the project works...
 | `live` | No | Live demo URL |
 | `order` | No | Sort order (lower numbers appear first) |
 
-### 3. Add Media Files
+### 3. Add Media Files.
 
 **Cover Image:**
 - Name it `cover.jpg`, `cover.png`, `thumbnail.jpg`, or `preview.jpg`
@@ -85,7 +85,7 @@ More detailed information about how the project works...
 - Great for short demos, animations, or UI interactions
 - A small loop icon appears on looping videos in the gallery
 
-### 4. Rebuild the Site (Optional)
+### 4. Rebuild the Site (Optional).
 
 If you're using the build script:
 

@@ -70,7 +70,7 @@ function parseProjectMd(content) {
 function markdownToHtml(md) {
     if (!md) return '';
 
-    return md
+    let html = md
         // Headers
         .replace(/^### (.+)$/gm, '<h4>$1</h4>')
         .replace(/^## (.+)$/gm, '<h3>$1</h3>')
@@ -80,15 +80,23 @@ function markdownToHtml(md) {
         .replace(/\*(.+?)\*/g, '<em>$1</em>')
         // Links
         .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
-        // Unordered lists
-        .replace(/^\s*[-*]\s+(.+)$/gm, '<li>$1</li>')
-        .replace(/(<li>.*<\/li>\n?)+/g, '<ul>$&</ul>')
-        // Paragraphs (double newlines)
+        // Unordered lists (must come before ordered lists)
+        .replace(/^\s*[-*]\s+(.+)$/gm, '<uli>$1</uli>')
+        // Ordered lists (1. 2. 3. etc.)
+        .replace(/^\s*\d+\.\s+(.+)$/gm, '<oli>$1</oli>');
+
+    // Wrap consecutive list items in ul/ol tags
+    html = html
+        .replace(/(<uli>.*<\/uli>\n?)+/g, match => `<ul>${match.replace(/<\/?uli>/g, m => m === '<uli>' ? '<li>' : '</li>')}</ul>`)
+        .replace(/(<oli>.*<\/oli>\n?)+/g, match => `<ol>${match.replace(/<\/?oli>/g, m => m === '<oli>' ? '<li>' : '</li>')}</ol>`);
+
+    // Paragraphs (double newlines)
+    return html
         .split(/\n\n+/)
         .map(p => {
             p = p.trim();
             if (!p) return '';
-            if (p.startsWith('<h') || p.startsWith('<ul')) return p;
+            if (p.startsWith('<h') || p.startsWith('<ul') || p.startsWith('<ol')) return p;
             return `<p>${p.replace(/\n/g, ' ')}</p>`;
         })
         .join('\n');
@@ -178,7 +186,7 @@ function generateProjectCard(project, slug) {
                     <div class="project-card" data-project="${slug}">
                         <div class="project-image">${imageHtml}
                             <div class="project-overlay">
-                                <button class="view-project-btn" onclick="openProjectModal('${slug}')">
+                                <button class="view-project-btn" data-action="open-modal" data-project="${slug}">
                                     <i class="fas fa-expand"></i> View Details
                                 </button>
                             </div>
@@ -292,9 +300,9 @@ function generateProjectModal(project, slug) {
     return `
         <!-- ${metadata.title} Modal -->
         <div class="project-modal" id="modal-${slug}" role="dialog" aria-labelledby="modal-title-${slug}" aria-hidden="true">
-            <div class="modal-backdrop" onclick="closeProjectModal('${slug}')"></div>
+            <div class="modal-backdrop" data-action="close-modal" data-project="${slug}"></div>
             <div class="modal-container">
-                <button class="modal-close" onclick="closeProjectModal('${slug}')" aria-label="Close modal">
+                <button class="modal-close" data-action="close-modal" data-project="${slug}" aria-label="Close modal">
                     <i class="fas fa-times"></i>
                 </button>
                 ${galleryHtml}
@@ -331,6 +339,12 @@ function loadProjects() {
 
     for (const entry of entries) {
         if (!entry.isDirectory()) continue;
+
+        // Skip directories starting with underscore (templates, drafts, etc.)
+        if (entry.name.startsWith('_')) {
+            console.log(`Skipping ${entry.name}: underscore-prefixed directory`);
+            continue;
+        }
 
         const projectDir = path.join(PROJECTS_DIR, entry.name);
         const projectMdPath = path.join(projectDir, 'project.md');

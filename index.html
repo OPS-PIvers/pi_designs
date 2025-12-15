@@ -1205,6 +1205,11 @@
             font-weight: 400;
         }
 
+        .testimonial-quote.testimonial-placeholder {
+            font-style: italic;
+            opacity: 0.8;
+        }
+
         .testimonial-author-premium {
             display: flex;
             align-items: center;
@@ -2528,7 +2533,7 @@
                         <div class="project-image">
                             <img src="projects/Doc2LMS/cover.jpg" alt="Doc2LMS" loading="lazy">
                             <div class="project-overlay">
-                                <button class="view-project-btn" onclick="openProjectModal('Doc2LMS')">
+                                <button class="view-project-btn" data-action="open-modal" data-project="Doc2LMS">
                                     <i class="fas fa-expand"></i> View Details
                                 </button>
                             </div>
@@ -2555,7 +2560,7 @@
                         <div class="project-image">
                             <img src="projects/Peer_Evaluator/cover.jpg" alt="Peer Evaluator" loading="lazy">
                             <div class="project-overlay">
-                                <button class="view-project-btn" onclick="openProjectModal('Peer_Evaluator')">
+                                <button class="view-project-btn" data-action="open-modal" data-project="Peer_Evaluator">
                                     <i class="fas fa-expand"></i> View Details
                                 </button>
                             </div>
@@ -2582,7 +2587,7 @@
                         <div class="project-image">
                             <img src="projects/Spartan_Cup/cover.jpg" alt="Spartan Cup" loading="lazy">
                             <div class="project-overlay">
-                                <button class="view-project-btn" onclick="openProjectModal('Spartan_Cup')">
+                                <button class="view-project-btn" data-action="open-modal" data-project="Spartan_Cup">
                                     <i class="fas fa-expand"></i> View Details
                                 </button>
                             </div>
@@ -2631,7 +2636,7 @@
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                             </div>
-                            <p class="testimonial-quote" style="font-style: italic; opacity: 0.8;">
+                            <p class="testimonial-quote testimonial-placeholder">
                                 [Your testimonial here] — This space is reserved for genuine feedback from clients and collaborators. Real testimonials coming soon!
                             </p>
                             <div class="testimonial-author-premium">
@@ -2656,7 +2661,7 @@
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                             </div>
-                            <p class="testimonial-quote" style="font-style: italic; opacity: 0.8;">
+                            <p class="testimonial-quote testimonial-placeholder">
                                 [Your testimonial here] — We value authentic feedback. This placeholder will be replaced with real client experiences.
                             </p>
                             <div class="testimonial-author-premium">
@@ -2680,7 +2685,7 @@
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                             </div>
-                            <p class="testimonial-quote" style="font-style: italic; opacity: 0.8;">
+                            <p class="testimonial-quote testimonial-placeholder">
                                 [Your testimonial here] — Genuine reviews from real collaborators will appear here as projects are completed.
                             </p>
                             <div class="testimonial-author-premium">
@@ -3228,14 +3233,29 @@
                 }
             }
         });
+
+        // Event delegation for modal actions
+        document.addEventListener('click', (e) => {
+            const target = e.target.closest('[data-action]');
+            if (!target) return;
+
+            const action = target.dataset.action;
+            const project = target.dataset.project;
+
+            if (action === 'open-modal' && project) {
+                openProjectModal(project);
+            } else if (action === 'close-modal' && project) {
+                closeProjectModal(project);
+            }
+        });
     </script>
 
     <!-- PROJECT-MODALS-START -->
     <!-- Doc2LMS Modal -->
     <div class="project-modal" id="modal-Doc2LMS" role="dialog" aria-labelledby="modal-title-Doc2LMS" aria-hidden="true">
-        <div class="modal-backdrop" onclick="closeProjectModal('Doc2LMS')"></div>
+        <div class="modal-backdrop" data-action="close-modal" data-project="Doc2LMS"></div>
         <div class="modal-container">
-            <button class="modal-close" onclick="closeProjectModal('Doc2LMS')" aria-label="Close modal">
+            <button class="modal-close" data-action="close-modal" data-project="Doc2LMS" aria-label="Close modal">
                 <i class="fas fa-times"></i>
             </button>
             <div class="modal-gallery">
@@ -3277,9 +3297,9 @@
 
     <!-- Peer Evaluator Modal -->
     <div class="project-modal" id="modal-Peer_Evaluator" role="dialog" aria-labelledby="modal-title-Peer_Evaluator" aria-hidden="true">
-        <div class="modal-backdrop" onclick="closeProjectModal('Peer_Evaluator')"></div>
+        <div class="modal-backdrop" data-action="close-modal" data-project="Peer_Evaluator"></div>
         <div class="modal-container">
-            <button class="modal-close" onclick="closeProjectModal('Peer_Evaluator')" aria-label="Close modal">
+            <button class="modal-close" data-action="close-modal" data-project="Peer_Evaluator" aria-label="Close modal">
                 <i class="fas fa-times"></i>
             </button>
             <div class="modal-gallery">
@@ -3321,9 +3341,9 @@
 
     <!-- Spartan Cup Modal -->
     <div class="project-modal" id="modal-Spartan_Cup" role="dialog" aria-labelledby="modal-title-Spartan_Cup" aria-hidden="true">
-        <div class="modal-backdrop" onclick="closeProjectModal('Spartan_Cup')"></div>
+        <div class="modal-backdrop" data-action="close-modal" data-project="Spartan_Cup"></div>
         <div class="modal-container">
-            <button class="modal-close" onclick="closeProjectModal('Spartan_Cup')" aria-label="Close modal">
+            <button class="modal-close" data-action="close-modal" data-project="Spartan_Cup" aria-label="Close modal">
                 <i class="fas fa-times"></i>
             </button>
             <div class="modal-gallery">
