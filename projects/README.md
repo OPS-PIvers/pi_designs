@@ -78,6 +78,13 @@ More detailed information about how the project works...
 - Add `.mp4`, `.webm`, or `.mov` files
 - These appear in the modal gallery with playback controls
 
+**Looping Videos (GIF-like):**
+- Add `_loop` to the filename to make videos autoplay and loop silently
+- Examples: `demo_loop.mp4`, `animation_loop.webm`, `preview_loop.mp4`
+- Looping videos play automatically, are muted, and repeat continuously
+- Great for short demos, animations, or UI interactions
+- A small loop icon appears on looping videos in the gallery
+
 ### 4. Rebuild the Site (Optional)
 
 If you're using the build script:
@@ -99,7 +106,8 @@ projects/Escape_Rooms/
   project.md          # Required
   cover.jpg           # Main card image
   puzzle1.png         # Gallery image
-  solution.mp4        # Demo video
+  solution.mp4        # Regular video with controls
+  ui_demo_loop.mp4    # Looping video (autoplays like a GIF)
 ```
 
 **projects/Escape_Rooms/project.md:**
@@ -152,3 +160,4 @@ projects/
 2. **Video Compression**: Keep videos under 10MB for fast loading
 3. **Consistent Naming**: Use underscores in directory names, not spaces
 4. **Order Field**: Use `order: 1, 2, 3...` to control display sequence
+5. **Looping Videos**: Add `_loop` to filename for GIF-like behavior (e.g., `demo_loop.mp4`)

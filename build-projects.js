@@ -102,7 +102,7 @@ function getMediaFiles(projectDir) {
     const media = {
         cover: null,
         images: [],
-        videos: []
+        videos: []  // Each video: { file: string, loop: boolean }
     };
 
     const imageExts = ['.jpg', '.jpeg', '.png', '.webp', '.gif'];
@@ -119,7 +119,9 @@ function getMediaFiles(projectDir) {
                 media.images.push(file);
             }
         } else if (videoExts.includes(ext)) {
-            media.videos.push(file);
+            // Check if video should loop (filename contains '_loop' or starts with 'loop')
+            const shouldLoop = baseName.includes('_loop') || baseName.startsWith('loop');
+            media.videos.push({ file, loop: shouldLoop });
         }
     }
 
@@ -212,7 +214,7 @@ function generateProjectModal(project, slug) {
         allMedia.push({ type: 'image', src: `projects/${slug}/${img}` });
     }
     for (const vid of media.videos) {
-        allMedia.push({ type: 'video', src: `projects/${slug}/${vid}` });
+        allMedia.push({ type: 'video', src: `projects/${slug}/${vid.file}`, loop: vid.loop });
     }
 
     if (allMedia.length > 0) {
@@ -223,9 +225,13 @@ function generateProjectModal(project, slug) {
                             <img src="${item.src}" alt="${metadata.title} screenshot ${idx + 1}" loading="lazy">
                         </div>`;
             } else {
+                // Looping videos autoplay muted like GIFs; regular videos have controls
+                const videoAttrs = item.loop
+                    ? 'autoplay loop muted playsinline class="loop-video"'
+                    : 'controls';
                 return `
-                        <div class="gallery-item${idx === 0 ? ' active' : ''}" data-index="${idx}">
-                            <video controls>
+                        <div class="gallery-item${idx === 0 ? ' active' : ''}${item.loop ? ' loop-video-container' : ''}" data-index="${idx}">
+                            <video ${videoAttrs}>
                                 <source src="${item.src}" type="video/${path.extname(item.src).slice(1)}">
                                 Your browser does not support video playback.
                             </video>
@@ -240,9 +246,11 @@ function generateProjectModal(project, slug) {
                                 <img src="${item.src}" alt="Thumbnail ${idx + 1}">
                             </button>`;
             } else {
+                // Use sync icon for looping videos, play icon for regular videos
+                const icon = item.loop ? 'fa-sync-alt' : 'fa-play-circle';
                 return `
-                            <button class="gallery-thumb${idx === 0 ? ' active' : ''}" data-index="${idx}">
-                                <i class="fas fa-play-circle"></i>
+                            <button class="gallery-thumb${idx === 0 ? ' active' : ''}" data-index="${idx}" title="${item.loop ? 'Looping video' : 'Video'}">
+                                <i class="fas ${icon}"></i>
                             </button>`;
             }
         }).join('');

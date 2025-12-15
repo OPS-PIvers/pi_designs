@@ -1956,6 +1956,34 @@
             object-fit: contain;
         }
 
+        /* Looping videos (GIF-like behavior) */
+        .gallery-item video.loop-video {
+            cursor: default;
+        }
+
+        .loop-video-container {
+            position: relative;
+        }
+
+        .loop-video-container::after {
+            content: '\f2f1';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            color: white;
+            font-size: 0.75rem;
+            background: rgba(0, 0, 0, 0.6);
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+        }
+
         .gallery-nav {
             position: absolute;
             top: 50%;
